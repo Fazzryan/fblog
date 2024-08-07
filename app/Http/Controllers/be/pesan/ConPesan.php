@@ -5,6 +5,7 @@ namespace App\Http\Controllers\be\pesan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ConPesan extends Controller
 {
@@ -14,6 +15,38 @@ class ConPesan extends Controller
         return view('backend.pages.pesan.index', compact('get_pesan'));
     }
 
+    public function act_add_pesan(Request $request)
+    {
+        $nm_lengkap = ucwords(strtolower($request->nm_lengkap));
+        $email = $request->email;
+        $pesan = $request->pesan;
+
+        //Validasi
+        $messages = array(
+            'required' => ':attribute Harus Di isi!',
+            'min'      => ':attribute Minimal 3 Karakter!',
+            'max'      => ':attribute Maksimal 50 Karakter!'
+        );
+        $attribute = array(
+            'nm_lengkap' => 'Nama Lengkap',
+            'email'      => 'Slug',
+        );
+        $credentials = array(
+            'nm_lengkap' => 'required|min:3|max:50',
+            'email'      => 'required|min:3|max:50',
+        );
+        $data_add = array(
+            'nm_lengkap' => $nm_lengkap,
+            'email'      => $email,
+        );
+        $validasi = $this->validate($request, $credentials, $messages, $attribute);
+        if ($validasi) {
+            $query_add = DB::table('tbl_pesan')->insert($data_add);
+            Toastr::success('message', 'Pesan Terikirim!');
+            return redirect()->back();
+            // ->with('success', 'Data Kategori : Berhasil Ditambahkan.');
+        }
+    }
     public function act_delete_pesan(Request $request)
     {
         $id_pesan = $request->id_pesan;

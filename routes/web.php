@@ -6,6 +6,7 @@ use App\Http\Controllers\be\dashboard\ConDashboard;
 use App\Http\Controllers\be\kategori\ConKategori;
 use App\Http\Controllers\be\pesan\ConPesan;
 use App\Http\Controllers\be\postingan\ConPostingan;
+use App\Http\Controllers\be\profile\ConProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,9 +73,21 @@ Route::group(['as' => 'be.', 'prefix' => '/u', 'middleware' => 'CekSession'],  f
     //--------------------------------------------------------------------------
     Route::group(['as' => 'pesan.', 'prefix' => '/pesan'],  function () {
         Route::get('/list', [ConPesan::class, 'index'])->name('list');
-
+        // Action Add
+        Route::post('/act_add_pesan', [ConPesan::class, 'act_add_pesan'])->name('act_add_pesan');
         // Action Delete
         Route::post('/act_delete_pesan', [ConPesan::class, 'act_delete_pesan'])->name('act_delete_pesan');
-        
+    });
+
+    //--------------------------------------------------------------------------
+    //  Routes Profile
+    //--------------------------------------------------------------------------
+    Route::group(['as' => 'profile.', 'prefix' => '/profile'],  function () {
+        Route::get('/', [ConProfile::class, 'index'])->name('list');
+
+        // Action Edit
+        Route::post('/act_edit_profile', [ConProfile::class, 'act_edit_profile'])->name('act_edit_profile');
+        // Action Delete
+        Route::post('/act_delete_pesan', [ConProfile::class, 'act_delete_pesan'])->name('act_delete_pesan');
     });
 });

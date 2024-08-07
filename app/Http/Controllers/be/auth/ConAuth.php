@@ -72,7 +72,7 @@ class ConAuth extends Controller
     public function act_logout()
     {
         Session::flush();
-        Toastr::error('message', 'Berhasil Logout');
+        Toastr::success('message', 'Berhasil Logout');
         return redirect()->route('login');
         // ->with('success', 'Berhasil logout!')
     }

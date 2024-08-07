@@ -14,7 +14,6 @@
                 <li class="nav-small-cap">
                     <span class="hide-menu">Applications</span>
                 </li>
-
                 <li
                     class="sidebar-item {{ Route::currentRouteNamed('be.postingan.add') || Route::currentRouteNamed('be.postingan.edit') ? 'selected' : '' }}">
                     <a class="sidebar-link" href="{{ route('be.postingan.list') }}" aria-expanded="false">
@@ -35,12 +34,26 @@
                     </a>
                 </li>
                 <li class="list-divider"></li>
+                <li class="nav-small-cap">
+                    <span class="hide-menu">Account</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('be.profile.list') }}" aria-expanded="false">
+                        <i data-feather="user" class="feather-icon"></i>
+                        <span class="hide-menu">Profile Saya</span>
+                    </a>
+                </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap">
+                    <span class="hide-menu">Extra</span>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('auth.act_logout') }}" aria-expanded="false">
                         <i data-feather="log-out" class="feather-icon"></i>
                         <span class="hide-menu">Logout</span>
                     </a>
                 </li>
+
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

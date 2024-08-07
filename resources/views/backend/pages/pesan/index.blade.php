@@ -1,6 +1,6 @@
 @extends('backend.layouts.app_main')
 @push('meta-seo')
-    <title>Fazzblog - Dashboard</title>
+    <title>Fazzblog - Pesan</title>
     <meta content="Halaman Pesan" name="description">
     <meta content="Dinda Fazryan" name="author">
     <meta content="fazzblog" name="keywords">
