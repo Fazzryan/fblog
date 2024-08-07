@@ -58,7 +58,7 @@ class ConAuth extends Controller
                 ];
                 Session::put('user_session', $user_session);
                 Session::put('login', TRUE);
-                
+
                 Toastr::success('message', 'Login Berhasil!');
                 return redirect()->route('be.dashboard');
                 // ->with('success', "Berhasil Login")
