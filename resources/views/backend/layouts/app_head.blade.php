@@ -7,6 +7,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/be/images/icons/favicon.png') }}">
 <!-- Custom CSS -->
 <link href="{{ asset('assets/be/css/style.min.css') }}" rel="stylesheet">
+{{-- toastr --}}
+<link rel="stylesheet" href="{{ asset('assets/be/libs/toastr/toastr.min.css') }}">
+
 @stack('custom-css')
 
 <!-- =======================================================

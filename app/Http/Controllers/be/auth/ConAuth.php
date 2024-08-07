@@ -5,6 +5,7 @@ namespace App\Http\Controllers\be\auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
 
 class ConAuth extends Controller
@@ -57,10 +58,12 @@ class ConAuth extends Controller
                 ];
                 Session::put('user_session', $user_session);
                 Session::put('login', TRUE);
-                // Toastr::success($msg, 'Berhasil');
-                return redirect()->route('be.dashboard')->with('success', "Berhasil Login");
+                
+                Toastr::success('message', 'Login Berhasil!');
+                return redirect()->route('be.dashboard');
+                // ->with('success', "Berhasil Login")
             } else {
-                // Toastr::error('message', 'Gagal');
+                Toastr::error('message', 'Login Gagal!');
                 return redirect()->back()->with('failed', 'Username atau Passwod Salah!');
             }
         }
@@ -69,8 +72,9 @@ class ConAuth extends Controller
     public function act_logout()
     {
         Session::flush();
-        // Toastr::error('Kamu Keluar :(', 'Berhasil');
-        return redirect()->route('login')->with('success', 'Berhasil logout!');
+        Toastr::error('message', 'Berhasil Logout');
+        return redirect()->route('login');
+        // ->with('success', 'Berhasil logout!')
     }
 
     public function cek_session()

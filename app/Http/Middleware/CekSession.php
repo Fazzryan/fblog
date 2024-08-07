@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +21,7 @@ class CekSession
         if ($login) {
             Session::get('user_session');
         } else {
-            // Toastr::success('Kamu Keluar', 'Berhasil');
+            Toastr::success('Kamu Keluar', 'Berhasil');
             return redirect()->route('login')->with('failed', 'Kamu belum login!');
         }
         return $next($request);
