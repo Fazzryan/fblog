@@ -72,5 +72,9 @@ Route::group(['as' => 'be.', 'prefix' => '/u', 'middleware' => 'CekSession'],  f
     //--------------------------------------------------------------------------
     Route::group(['as' => 'pesan.', 'prefix' => '/pesan'],  function () {
         Route::get('/list', [ConPesan::class, 'index'])->name('list');
+
+        // Action Delete
+        Route::post('/act_delete_pesan', [ConPesan::class, 'act_delete_pesan'])->name('act_delete_pesan');
+        
     });
 });

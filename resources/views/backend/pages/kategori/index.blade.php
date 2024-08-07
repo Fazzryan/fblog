@@ -167,9 +167,9 @@
                                 </div>
                             </form>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div>
+                    </div> {{-- modal content --}}
+                </div>{{-- modal dialog --}}
+            </div>{{-- modal --}}
 
             {{-- Hapus Data --}}
             <div id="delete_kategori" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -189,9 +189,9 @@
                                 </form>
                             </div>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                    </div> {{-- modal content --}}
+                </div>{{-- modal dialog --}}
+            </div>{{-- modal --}}
         </div>
     </div>
 @endsection
