@@ -18,16 +18,18 @@ use App\Http\Controllers\be\postingan\ConPostingan;
 |
 */
 
-Route::get('/', function () {
-    return view('backend.pages.dashboard.index');
-});
+// Route::get('/', function () {
+//     return view('backend.pages.dashboard.index');
+// });
+
+Route::get('login', [ConAuth::class, 'index'])->name('login');
 
 Route::group(['as' => 'auth.', 'prefix' => '/auth'],  function () {
-    Route::post('/act_login', [ConAuth::class, 'act_login'])->name('act.login');
-    Route::get('/act_logout', [ConAuth::class, 'act_logout'])->name('act.logout');
+    Route::post('/act_login', [ConAuth::class, 'act_login'])->name('act_login');
+    Route::get('/act_logout', [ConAuth::class, 'act_logout'])->name('act_logout');
 });
 
-Route::group(['as' => 'be.', 'prefix' => '/u'],  function () {
+Route::group(['as' => 'be.', 'prefix' => '/u', 'middleware' => 'CekSession'],  function () {
 
     //--------------------------------------------------------------------------
     //  Routes Dashboard

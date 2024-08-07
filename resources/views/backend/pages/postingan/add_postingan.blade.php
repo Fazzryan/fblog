@@ -3,7 +3,7 @@
     <title>Fazzblog - Tambah Postingan</title>
     <meta content="Halaman Tambah Postingan" name="description">
     <meta content="Dinda Fazryan" name="author">
-    <meta content="fblog" name="keywords">
+    <meta content="fazzblog" name="keywords">
 @endpush
 @push('custom-css')
     <!-- This page plugin CSS -->

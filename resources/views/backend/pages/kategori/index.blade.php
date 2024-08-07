@@ -1,9 +1,9 @@
 @extends('backend.layouts.app_main')
 @push('meta-seo')
-    <title>Fazzblog - Dashboard</title>
-    <meta content="" name="description">
-    <meta content="" name="author">
-    <meta content="" name="keywords">
+    <title>Fazzblog - Kategori</title>
+    <meta content="Halaman Kategori" name="description">
+    <meta content="Dinda Fazryan" name="author">
+    <meta content="fazzblog" name="keywords">
 @endpush
 @push('custom-css')
     <!-- This page plugin CSS -->

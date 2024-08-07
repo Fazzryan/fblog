@@ -134,11 +134,12 @@
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         {{-- {{ asset('public/assets/be/images/users/profile-pic.jpg') }} --}}
-                        <img src="" alt="user" class="rounded-circle" width="40">
+                        <img src="{{ asset('assets/be/images/pic/profile-pic.jpg') }}" alt="user"
+                            class="rounded-circle" width="40">
                         <span class="ms-2 d-none d-lg-inline-block">
                             <span>Hello,</span>
                             <span class="text-dark text-capitalize">
-                                {{-- {{ Session::get('karyawan_session')['username'] }} --}}
+                                {{ Session::get('user_session')['username'] }}
                             </span>
                             <i data-feather="chevron-down" class="svg-icon"></i>
                         </span>

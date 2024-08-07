@@ -36,7 +36,7 @@
                 </li>
                 <li class="list-divider"></li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="authentication-login1.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('auth.act_logout') }}" aria-expanded="false">
                         <i data-feather="log-out" class="feather-icon"></i>
                         <span class="hide-menu">Logout</span>
                     </a>
