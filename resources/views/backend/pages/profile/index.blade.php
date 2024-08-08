@@ -36,55 +36,186 @@
 @endpush
 @section('konten')
     <div class="row">
-        @include('backend.layouts.app_session')
-        <div class="col-md-6">
+        <div class="col-12">
+            @include('backend.layouts.app_session')
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
             <div class="card">
-
                 <div class="card-body">
-
                     <dl class="row">
-                        <dt class="col-sm-4">Foto Profile</dt>
+                        <dt class="col-sm-4 fw-medium">Foto Profile</dt>
                         <dd class="col-sm-8">
                             <img src="" alt="profile" class="img-fluid rounded-circle">
                         </dd>
 
-                        <dt class="col-sm-4">Username</dt>
-                        <dd class="col-sm-8">
-                            <div class="text-capitalized">{{ $profile->username }}</div>
-                        </dd>
-
-                        <dt class="col-sm-4">Nama Depan</dt>
+                        <dt class="col-sm-4 fw-medium">Nama Depan</dt>
                         <dd class="col-sm-8">{{ $profile->nm_depan }}</dd>
 
-                        <dt class="col-sm-4">Nama Belakang</dt>
+                        <dt class="col-sm-4 fw-medium">Nama Belakang</dt>
                         <dd class="col-sm-8">{{ $profile->nm_belakang }}</dd>
 
-                        <dt class="col-sm-4">Youtube</dt>
+                        <dt class="col-sm-4 fw-medium">Youtube</dt>
                         <dd class="col-sm-8">{{ $profile->youtube }}</dd>
 
-                        <dt class="col-sm-4">Instagram</dt>
+                        <dt class="col-sm-4 fw-medium">Instagram</dt>
                         <dd class="col-sm-8">{{ $profile->instagram }}</dd>
 
-                        <dt class="col-sm-4">Github</dt>
+                        <dt class="col-sm-4 fw-medium">Github</dt>
                         <dd class="col-sm-8">{{ $profile->github }}</dd>
-
                     </dl>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#edit_profile">Ubah Profile</button>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="card">
-                <img src="" alt="profile" class="img-fluid rounded-circle">
                 <div class="card-body">
-
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="add-username" name="username"
+                                    value="{{ $profile->username }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-2">
+                                <label for="pass" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="add-pass" name="pass"
+                                    value="{{ $profile->pass }}" readonly>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#ubah_pw">Ubah Password</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    @endsection
-    @push('js')
-        <!--This page plugins -->
-        <script>
-            // Delete Kategori
-            function edit_profile(id) {}
-        </script>
-    @endpush
+
+        {{-- Edit Data edit_profile --}}
+        <div id="edit_profile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="edit_data_label">Ubah Profile</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('be.profile.act_edit_profile') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="form-body">
+                                <input type="hidden" id="edt-id_user" name="id_user" value="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Nama Depan</label>
+                                            <input type="text" id="edt-nm_depan" name="nm_depan" class="form-control"
+                                                value="{{ old('nm_depan') }}" placeholder="Masukan Nama Depan" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Nama Belakang</label>
+                                            <input type="text" id="edt-nm_belakang" name="nm_belakang"
+                                                class="form-control" value="{{ old('nm_belakang') }}"
+                                                placeholder="Masukan Nama Belakang" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Youtube</label>
+                                            <input type="text" id="edt-youtube" name="youtube" class="form-control"
+                                                value="{{ old('youtube') }}" placeholder="Masukan Link Youtube" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Instagram</label>
+                                            <input type="text" id="edt-instagram" name="instagram"
+                                                class="form-control" value="{{ old('instagram') }}"
+                                                placeholder="Masukan Link Instagram" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Github</label>
+                                            <input type="text" id="edt-github" name="github" class="form-control"
+                                                value="{{ old('github') }}" placeholder="Masukan Link Github" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-info">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> {{-- modal content --}}
+            </div>{{-- modal dialog --}}
+        </div>{{-- modal --}}
+
+        {{-- Edit Data Auth --}}
+        <div id="ubah_pw" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="edit_data_label">Ubah Username/Password</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('be.profile.act_edit_auth') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="form-body">
+                                <input type="hidden" id="edt-id_user" name="id_user" value="">
+                                <label class="form-label">Username</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <input type="text" id="edt-username" name="username" class="form-control"
+                                                value="{{ old('username') }}" placeholder="Masukan Username" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="form-label">Password</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <input type="text" id="edt-pass" name="pass" class="form-control"
+                                                value="{{ old('pass') }}" placeholder="Masukan Password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-info">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> {{-- modal content --}}
+            </div>{{-- modal dialog --}}
+        </div>{{-- modal --}}
+    </div>
+@endsection
+@push('js')
+    <!--This page plugins -->
+    <script>
+        $('#edt-nm_depan').val("{{ $profile->nm_depan }}")
+        $('#edt-nm_belakang').val("{{ $profile->nm_belakang }}")
+        $('#edt-youtube').val("{{ $profile->youtube }}")
+        $('#edt-instagram').val("{{ $profile->instagram }}")
+        $('#edt-github').val("{{ $profile->github }}")
+
+        $('#edt-id_user').val("{{ $profile->id_user }}")
+        $('#edt-username').val("{{ $profile->username }}")
+        $('#edt-pass').val("{{ $profile->pass }}")
+    </script>
+@endpush

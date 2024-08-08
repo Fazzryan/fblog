@@ -86,6 +86,7 @@ Route::group(['as' => 'be.', 'prefix' => '/u', 'middleware' => 'CekSession'],  f
         Route::get('/', [ConProfile::class, 'index'])->name('list');
 
         // Action Edit
+        Route::post('/act_edit_auth', [ConProfile::class, 'act_edit_auth'])->name('act_edit_auth');
         Route::post('/act_edit_profile', [ConProfile::class, 'act_edit_profile'])->name('act_edit_profile');
         // Action Delete
         Route::post('/act_delete_pesan', [ConProfile::class, 'act_delete_pesan'])->name('act_delete_pesan');
