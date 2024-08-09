@@ -10,7 +10,9 @@
             <div class="navbar-brand">
                 <!-- Logo icon -->
                 <a href="index.html">
-                    <img src="" alt="" class="img-fluid" width="150">
+                    <img src="{{ asset('assets/be/images/icons/logo.png') }}" alt="" class="img-fluid"
+                        width="65">
+                    <span class="fw-bold">Fazzblog</span>
                 </a>
             </div>
             <!-- ============================================================== -->
@@ -32,6 +34,7 @@
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav float-left me-auto ms-3 ps-1">
+                <div>formatTanggal()</div>
                 <!-- Notification -->
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
@@ -145,16 +148,13 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
-                        <a class="dropdown-item" href="javascript:void(0)">
+                        <a class="dropdown-item" href="{{ route('be.profile.list') }}">
                             <i data-feather="user" class="svg-icon me-2 ms-1"></i>Profil Saya
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href=""><i data-feather="power"
+                        <a class="dropdown-item" href="{{ route('auth.act_logout') }}"><i data-feather="power"
                                 class="svg-icon me-2 ms-1"></i>
                             Logout</a>
-                        <div class="dropdown-divider"></div>
-                        <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                                Profile</a></div>
                     </div>
                 </li>
                 <!-- ============================================================== -->

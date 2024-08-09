@@ -117,7 +117,7 @@
                         <form action="{{ route('be.profile.act_edit_profile') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-body">
-                                <input type="hidden" id="edt-id_user" name="id_user" value="">
+                                <input type="hidden" id="edt-id_user" class="edt-id_user" name="id_user" value="">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
@@ -183,7 +183,8 @@
                         <form action="{{ route('be.profile.act_edit_auth') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-body">
-                                <input type="hidden" id="edt-id_user" name="id_user" value="">
+                                <input type="hidden" id="edt-id_user" class="edt-id_user" name="id_user"
+                                    value="">
                                 <label class="form-label">Username</label>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -225,11 +226,11 @@
             $('#edt-instagram').val("{{ $profile->instagram }}")
             $('#edt-github').val("{{ $profile->github }}")
 
-            $('#edt-id_user').val("{{ $profile->id_user }}")
+            $('.edt-id_user').val("{{ $profile->id_user }}")
             $('#edt-username').val("{{ $profile->username }}")
             $('#edt-pass').val("{{ $profile->pass }}")
         @else
-            $('#edt-id_user').val("{{ session()->get('user_session')['id_user'] }}")
+            $('.edt-id_user').val("{{ session()->get('user_session')['id_user'] }}")
         @endif
     </script>
 @endpush

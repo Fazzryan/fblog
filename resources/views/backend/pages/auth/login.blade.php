@@ -35,16 +35,16 @@
         <!-- ============================================================== -->
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative"
             style="background:url(assets/be/images/ic/auth-bg.jpg) no-repeat center center;">
-            <div class="auth-box row">
-                <div class="col-lg-7 col-md-5 modal-bg-img" style="background-image: url(assets/be/images/ic/3.jpg);">
-                </div>
-                <div class="col-lg-5 col-md-7 bg-white">
+            <div class="row justify-content-center">
+                {{-- <div class="col-lg-7 col-md-5 modal-bg-img" style="background-image: url(assets/be/images/ic/3.jpg);">
+                </div> --}}
+                <div class="col-lg-6 col-md-7 bg-white">
                     <div class="p-3">
                         <div class="text-center">
-                            <img src="assets/be/images/ic/icon.png" alt="wrapkit">
+                            <img src="assets/be/images/icons/logo.png" alt="logo" width="95">
                         </div>
                         <h2 class="mt-3 text-dark text-center">Log In</h2>
-                        <p class="text-center">Enter your username and password to access admin panel.</p>
+                        <p class="text-center">Masukan username dan password untuk mengakses halaman dashboard</p>
                         @include('backend.layouts.app_session')
 
                         <form action="{{ route('auth.act_login') }}" method="post" class="mt-4">
@@ -54,14 +54,14 @@
                                     <div class="form-group mb-3">
                                         <label class="form-label text-dark" for="uname">Username</label>
                                         <input class="form-control" id="uname" name="username" type="text"
-                                            placeholder="enter your username">
+                                            placeholder="Masukan username">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label text-dark" for="pwd">Password</label>
                                         <input class="form-control" id="pwd" name="password" type="password"
-                                            placeholder="enter your password">
+                                            placeholder="Masukan password">
                                     </div>
                                 </div>
                                 <div class="col-lg-12 text-center">

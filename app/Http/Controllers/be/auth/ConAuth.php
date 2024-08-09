@@ -37,8 +37,8 @@ class ConAuth extends Controller
             'password' => 'Password',
         );
         $credentials = array(
-            'username' => 'required|max:50',
-            'password' => 'required|min:6|max:50',
+            'username' => 'required',
+            'password' => 'required',
         );
         $validasi = $this->validate($request, $credentials, $messages, $attribute);
         if ($validasi) {

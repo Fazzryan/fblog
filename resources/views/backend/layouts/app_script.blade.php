@@ -14,6 +14,7 @@
  <script src="{{ asset('assets/be/js/sidebarmenu.js') }}"></script>
  <!--Custom JavaScript -->
  <script src="{{ asset('assets/be/js/custom.min.js') }}"></script>
+ <script src="{{ asset('assets/be/js/tambahan/formatTanggal.js') }}"></script>
  {{-- toastr --}}
  <script src="{{ asset('assets/be/libs/toastr/toastr.min.js') }}" type="text/javascript"></script>
 
