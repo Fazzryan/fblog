@@ -8,7 +8,6 @@ function formatTanggal() {
         year: "numeric"
     });
     const sekarang = dateFormatter.format(date);
-    console.log(sekarang);
 
     return sekarang
 }

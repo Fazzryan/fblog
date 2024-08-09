@@ -28,8 +28,7 @@ class ConProfile extends Controller
         $youtube     = $request->youtube;
         $instagram   = $request->instagram;
         $github      = $request->github;
-
-        // dd($id_user . '-' . $nm_depan . '-' . $nm_belakang . '-' . $youtube, '-', $instagram, '-', $github);
+        $gambar      = $request->gambar;
 
         // validasi
         $messages = array(
@@ -52,57 +51,115 @@ class ConProfile extends Controller
             'instagram'   => 'required',
             'github'      => 'required',
         );
-        $data_update = array(
+        $data_update_non_img = array(
             'nm_depan'    => $nm_depan,
             'nm_belakang' => $nm_belakang,
             'youtube'     => $youtube,
             'instagram'   => $instagram,
             'github'      => $github,
         );
-        $validasi = $this->validate($request, $credentials, $messages, $attribute);
-        if ($validasi) {
-            // cek id user
-            $cek_id_user = DB::table('tbl_profile')->where('id_user', $id_user)->count();
-            if ($cek_id_user > 0) {
-                // cek perubahan
-                $cek_perubahan = DB::table('tbl_profile')
-                    ->where('id', $id_user)
-                    ->where('nm_depan', $nm_depan)
-                    ->where('nm_belakang', $nm_belakang)
-                    ->where('youtube', $youtube)
-                    ->where('instagram', $instagram)
-                    ->where('github', $github)->count();
-                if ($cek_perubahan > 0) {
-                    return redirect()->back()->with('failed', 'Data Profile : Tidak ada perubahan!');
-                } else {
-                    // cek apakah data tersedia
-                    $cek_id_nm_depan = DB::table('tbl_profile')->where('id_user', $id_user)->where('nm_depan', $nm_depan)->count();
-                    if ($cek_id_nm_depan > 0) {
-                        $data_update = array(
-                            'nm_belakang' => $nm_belakang,
-                            'youtube'     => $youtube,
-                            'instagram'   => $instagram,
-                            'github'      => $github,
-                        );
-                        $query_update = DB::table('tbl_profile')->where('id', $id_user)->update($data_update);
-                        return redirect()->back()->with('success', 'Data Profile : Berhasil Diubah!');
+        if ($gambar == null) {
+            $validasi = $this->validate($request, $credentials, $messages, $attribute);
+            if ($validasi) {
+                // cek id user
+                $cek_id_user = DB::table('tbl_profile')->where('id_user', $id_user)->count();
+                // dd($cek_id_user);
+                if ($cek_id_user > 0) {
+                    // cek perubahan
+                    $cek_perubahan = DB::table('tbl_profile')
+                        ->where('id', $id_user)
+                        ->where('nm_depan', $nm_depan)
+                        ->where('nm_belakang', $nm_belakang)
+                        ->where('youtube', $youtube)
+                        ->where('instagram', $instagram)
+                        ->where('github', $github)->count();
+                    if ($cek_perubahan > 0) {
+                        return redirect()->back()->with('failed', 'Data Profile : Tidak ada perubahan!');
                     } else {
-                        // cek nama depan apakah tersedia
-                        $cek_nm_depan = DB::table('tbl_profile')->where('nm_depan', $nm_depan)->count();
-                        if ($cek_nm_depan > 0) {
-                            return redirect()->back()->with('failed', 'Nama Depan Sudah Dipakai!');
+                        // cek apakah data tersedia
+                        $cek_id_nm_depan = DB::table('tbl_profile')->where('id_user', $id_user)->where('nm_depan', $nm_depan)->count();
+                        if ($cek_id_nm_depan > 0) {
+                            $data_update = array(
+                                'nm_belakang' => $nm_belakang,
+                                'youtube'     => $youtube,
+                                'instagram'   => $instagram,
+                                'github'      => $github,
+                            );
+                            $query_update = DB::table('tbl_profile')->where('id', $id_user)->update($data_update);
+                            return redirect()->back()->with('success', 'Data Profile : Berhasil Diubah!');
                         } else {
-                            $query_update = DB::table('tbl_profile')->where('id_user', $id_user)->update($data_update);
-                            return redirect()->back()
-                                ->with('success', 'Data User : Berhasil Diubah!');
+                            // cek nama depan apakah tersedia
+                            $cek_nm_depan = DB::table('tbl_profile')->where('nm_depan', $nm_depan)->count();
+                            if ($cek_nm_depan > 0) {
+                                return redirect()->back()->with('failed', 'Nama Depan Sudah Dipakai!');
+                            } else {
+                                $query_update = DB::table('tbl_profile')->where('id_user', $id_user)->update($data_update_non_img);
+                                return redirect()->back()->with('success', 'Data User : Berhasil Diubah!');
+                            }
                         }
                     }
+                } else {
+                    return redirect()->back()->with('failed', 'Data User : Tidak Ditemukan!');
                 }
-            } else {
-                return redirect()->back()->with('failed', 'Data User : Tidak Ditemukan!');
+            }
+        } else {
+            $gambar_profile = $request->file('gambar');
+            $validasi = $this->validate($request, $credentials, $messages, $attribute);
+            if ($validasi) {
+                $ori_ekstensi = $gambar_profile->getClientOriginalExtension();
+                $ori_size     = number_format($gambar_profile->getSize() / 1024, 0); //KB
+                $size_foto    = str_replace(',', '', $ori_size);
+
+                if (($ori_ekstensi == "jpg") || ($ori_ekstensi == "png") || ($ori_ekstensi == "JPG") || ($ori_ekstensi == "PNG")) {
+                    if (($size_foto < 3) || ($size_foto > 2000)) {
+                        return redirect()->back()->with('failed', 'foto maksimal 2mb, minimal 10kb!');
+                    } else {
+                        //package update
+                        $nm_foto = "profile-" . $id_user . "-" . rand() . "." . $ori_ekstensi;
+                        $data_update_with_img = array_merge($data_update_non_img, array('foto' => $nm_foto));
+                        // cek apakah data tersedia
+                        $cek_id_nm_depan = DB::table('tbl_profile')->where('id_user', $id_user)->where('nm_depan', $nm_depan)->count();
+                        if ($cek_id_nm_depan > 0) {
+                            $data_update = array(
+                                'nm_belakang' => $nm_belakang,
+                                'youtube'     => $youtube,
+                                'instagram'   => $instagram,
+                                'github'      => $github,
+                            );
+                            $data_update_with_img_2 = array_merge($data_update, array('foto' => $nm_foto));
+
+                            //Unlink Logo
+                            $get_foto = DB::table('tbl_profile')->where('id_user', $id_user)->first()->foto;
+                            if ($get_foto > 0) {
+                                unlink(public_path('/assets/be/images/pic/' . $get_foto));
+                            }
+                            $update = DB::table('tbl_profile')->where('id', $id_user)->update($data_update_with_img_2);
+                            $gambar_profile->move(public_path('/assets/be/images/pic/'), $nm_foto);
+                            return redirect()->back()->with('success', 'Data Profile : Berhasil Diubah!');
+                        } else {
+                            // cek nama depan apakah tersedia
+                            $cek_nm_depan = DB::table('tbl_profile')->where('nm_depan', $nm_depan)->count();
+                            if ($cek_nm_depan > 0) {
+                                return redirect()->back()->with('failed', 'Nama Depan Sudah Dipakai!')->withInput();
+                            } else {
+                                //Unlink Logo
+                                $get_foto = DB::table('tbl_profile')->where('id_user', $id_user)->first()->foto;
+                                if ($get_foto > 0) {
+                                    unlink(public_path('/assets/be/images/pic/' . $get_foto));
+                                }
+                                $update = DB::table('tbl_profile')->where('id', $id_user)->update($data_update_with_img);
+                                $gambar_profile->move(public_path('/assets/be/images/pic/'), $nm_foto);
+                                return redirect()->back()->with('success', 'Data Profile : Berhasil Diubah!');
+                            }
+                        }
+                    }
+                } else {
+                    return redirect()->back()->with('failed', 'Ekstensi foto harus .jpg atau .png!');
+                }
             }
         }
     }
+
     public function act_edit_auth(Request $request)
     {
         $id_user = $request->id_user;

@@ -40,7 +40,7 @@
             @include('backend.layouts.app_session')
         </div>
     </div>
-    <div class="row">
+    <div class="row about">
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
@@ -48,9 +48,13 @@
                         <p>Belum ada profil.</p>
                     @else
                         <dl class="row">
-                            <dt class="col-sm-4 fw-medium">Foto Profile</dt>
-                            <dd class="col-sm-8">
-                                <img src="" alt="profile" class="img-fluid rounded-circle">
+                            <dd class="col-sm-12 text-center">
+                                @if ($profile->foto == null)
+                                    <p>Belum ada foto</p>
+                                @else
+                                    <img src="{{ asset('assets/be/images/pic/') . '/' . $profile->foto }}" alt="profile"
+                                        class="img-profile">
+                                @endif
                             </dd>
 
                             <dt class="col-sm-4 fw-medium">Nama Depan</dt>
@@ -114,7 +118,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('be.profile.act_edit_profile') }}" method="POST">
+                        <form action="{{ route('be.profile.act_edit_profile') }}" method="POST"
+                            enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-body">
                                 <input type="hidden" id="edt-id_user" class="edt-id_user" name="id_user" value="">
@@ -132,6 +137,21 @@
                                             <input type="text" id="edt-nm_belakang" name="nm_belakang"
                                                 class="form-control" value="{{ old('nm_belakang') }}"
                                                 placeholder="Masukan Nama Belakang" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Profile</label>
+                                            <input type="file" id="edt-gambar" name="gambar" class="form-control"
+                                                accept="image/*" onchange="gantiGambar()">
+                                            <input type="hidden" id="edt-old_image" name="old_image"
+                                                class="form-control" value="">
+                                            {{-- @if ($profile->foto != null)
+                                                <p>belum</p>
+                                            @else
+                                                <img src="{{ asset('assets/be/images/pic/') . '/' . $profile->foto }}"
+                                                    alt="profile" width="100" class="mt-3">
+                                            @endif --}}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -232,5 +252,9 @@
         @else
             $('.edt-id_user').val("{{ session()->get('user_session')['id_user'] }}")
         @endif
+
+        function gantiGambar() {
+            $("#edt-old_image").val("gantiGambar");
+        }
     </script>
 @endpush

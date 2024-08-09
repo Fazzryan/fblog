@@ -34,7 +34,7 @@
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav float-left me-auto ms-3 ps-1">
-                <div>formatTanggal()</div>
+                <div id="dateNow"></div>
                 <!-- Notification -->
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
