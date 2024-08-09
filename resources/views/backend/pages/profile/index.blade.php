@@ -73,7 +73,7 @@
                             <dd class="col-sm-8">{{ $profile->github }}</dd>
                         </dl>
                     @endif
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-primary rounded-6" data-bs-toggle="modal"
                         data-bs-target="#edit_profile">Ubah Profile</button>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-primary rounded-6" data-bs-toggle="modal"
                                     data-bs-target="#ubah_pw">Ubah Password</button>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
         {{-- Edit Data edit_profile --}}
         <div id="edit_profile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content rounded-8">
                     <div class="modal-header">
                         <h4 class="modal-title" id="edit_data_label">Ubah Profile</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
@@ -180,7 +180,7 @@
                             </div>
                             <div class="form-actions">
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-info">
+                                    <button type="submit" class="btn btn-info rounded-6">
                                         {{ $profile != null ? 'Update' : 'Tambah' }}
                                     </button>
                                 </div>
@@ -194,7 +194,7 @@
         {{-- Edit Data Auth --}}
         <div id="ubah_pw" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content rounded-8">
                     <div class="modal-header">
                         <h4 class="modal-title" id="edit_data_label">Ubah Username/Password</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
@@ -226,7 +226,7 @@
                             </div>
                             <div class="form-actions">
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-info">Update</button>
+                                    <button type="submit" class="btn btn-info rounded-6">Update</button>
                                 </div>
                             </div>
                         </form>

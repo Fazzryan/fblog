@@ -45,7 +45,7 @@
                     @include('backend.layouts.app_session')
 
                     <div class="mb-3">
-                        <a href="{{ route('be.postingan.list') }}" class="btn btn-primary">Kembali</a>
+                        <a href="{{ route('be.postingan.list') }}" class="btn btn-primary rounded-6">Kembali</a>
                     </div>
                     <form action="{{ route('be.postingan.act_edit_postingan') }}" method="post"
                         enctype="multipart/form-data">

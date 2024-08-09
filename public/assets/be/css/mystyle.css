@@ -6,6 +6,9 @@ body {
 .rounded-8 {
     border-radius: 8px;
 }
+.rounded-6 {
+    border-radius: 6px;
+}
 .fs-7 {
     font-size: 14px;
 }

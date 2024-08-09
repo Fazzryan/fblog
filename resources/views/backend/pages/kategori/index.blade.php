@@ -41,8 +41,9 @@
                 <div class="card-body">
                     @include('backend.layouts.app_session')
                     <div class="mb-4">
-                        <a href="" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#tambah_kategori">Tambah Kategori</a>
+                        <button type="button" class="btn btn-primary rounded-6" data-bs-toggle="modal"
+                            data-bs-target="#tambah_kategori">Tambah
+                            Kategori</button>
                     </div>
                     <div class="table-responsive">
                         <table id="tbl_kategori" class="table border table-striped table-bordered text-nowrap">
@@ -61,13 +62,13 @@
                                         <td>{{ $item->nm_kategori }}</td>
                                         <td>{{ $item->jml }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#edit_kategori"
+                                            <button type="button" class="btn btn-sm btn-success rounded-6"
+                                                data-bs-toggle="modal" data-bs-target="#edit_kategori"
                                                 onclick="edit_kategori({{ $item->id }})">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete_kategori"
+                                            <button type="button" class="btn btn-sm btn-danger rounded-6"
+                                                data-bs-toggle="modal" data-bs-target="#delete_kategori"
                                                 onclick="delete_kategori({{ $item->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
@@ -83,7 +84,7 @@
             {{-- Tambah Data --}}
             <div id="tambah_kategori" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
+                    <div class="modal-content rounded-8">
                         <div class="modal-header">
                             <h4 class="modal-title" id="tambah_data_label">Tambah Kategori Baru</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
@@ -115,7 +116,7 @@
                                 </div>
                                 <div class="form-actions">
                                     <div class="text-end">
-                                        <button type="submit" class="btn btn-info">Tambah</button>
+                                        <button type="submit" class="btn btn-primary rounded-6">Tambah</button>
                                     </div>
                                 </div>
                             </form>
@@ -126,8 +127,8 @@
 
             {{-- Edit Data --}}
             <div id="edit_kategori" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-8">
                         <div class="modal-header">
                             <h4 class="modal-title" id="edit_data_label">Edit Kategori</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
@@ -160,7 +161,7 @@
                                 </div>
                                 <div class="form-actions">
                                     <div class="text-end">
-                                        <button type="submit" class="btn btn-info">Update</button>
+                                        <button type="submit" class="btn btn-primary rounded-6">Update</button>
                                     </div>
                                 </div>
                             </form>
@@ -172,7 +173,7 @@
             {{-- Hapus Data --}}
             <div id="delete_kategori" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered">
-                    <div class="modal-content modal-filled bg-dark ">
+                    <div class="modal-content modal-filled bg-dark rounded-8">
                         <div class="modal-body p-4">
                             <div class="text-center">
                                 <h4 class="mt-2">Yakin Hapus Data Kategori?</h4>
@@ -180,9 +181,9 @@
                                 <form action="{{ route('be.kategori.act_delete_kategori') }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" id="hps-id_kategori" name="id_kategori" value="">
-                                    <button type="button" class="btn btn-light my-2"
+                                    <button type="button" class="btn btn-light rounded-6 my-2"
                                         data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-danger my-2"
+                                    <button type="submit" class="btn btn-danger rounded-6 my-2"
                                         data-bs-dismiss="modal">Yakin</button>
                                 </form>
                             </div>

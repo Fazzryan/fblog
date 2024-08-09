@@ -43,7 +43,7 @@
                     @include('backend.layouts.app_session')
 
                     <div class="mb-3">
-                        <a href="{{ route('be.postingan.add') }}" class="btn btn-primary">Tambah Postingan</a>
+                        <a href="{{ route('be.postingan.add') }}" class="btn btn-primary rounded-6">Tambah Postingan</a>
                     </div>
                     <div class="table-responsive">
                         <table id="tbl_postingan" class="table border table-striped table-bordered text-nowrap">
@@ -59,7 +59,6 @@
                             </thead>
                             <tbody>
                                 @foreach ($get_postingan as $key => $item)
-                                    {{-- @dd($get_postingan) --}}
                                     @php
                                         $id = base64_encode($item->id);
                                         $id_postingan = "'" . $id . "'";
@@ -77,12 +76,12 @@
                                         <td class="text-capitalized text-wrap">{{ $item->nm_kategori }}</td>
                                         <td class="text-capitalized text-wrap">{!! Str::limit($item->content, 40, '...') !!}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-success"
+                                            <button type="button" class="btn btn-sm btn-success rounded-6"
                                                 onclick="edit_postingan({{ $item->id }})">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete_postingan"
+                                            <button type="button" class="btn btn-sm btn-danger rounded-6"
+                                                data-bs-toggle="modal" data-bs-target="#delete_postingan"
                                                 onclick="delete_postingan({{ $item->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
@@ -98,7 +97,7 @@
             {{-- Hapus Data --}}
             <div id="delete_postingan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered">
-                    <div class="modal-content modal-filled bg-dark ">
+                    <div class="modal-content modal-filled bg-dark rounded-6">
                         <div class="modal-body p-4">
                             <div class="text-center">
                                 <h4 class="mt-2">Yakin Hapus Data postingan?</h4>
@@ -106,8 +105,9 @@
                                 <form action="{{ route('be.postingan.act_delete_postingan') }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" id="hps-id_postingan" name="id_postingan" value="">
-                                    <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-danger my-2"
+                                    <button type="button" class="btn btn-light my-2 rounded-6"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-danger my-2 rounded-6"
                                         data-bs-dismiss="modal">Yakin</button>
                                 </form>
                             </div>

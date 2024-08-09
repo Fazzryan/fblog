@@ -144,7 +144,7 @@
                 </div>
                 <div class="d-md-flex align-items-center justify-content-end">
                     <a href="{{ route('be.postingan.list') }}"
-                        class="rounded-8 btn fs-7 btn-primary text-end fw-medium">Lihat
+                        class="rounded-6 btn fs-7 btn-primary text-end fw-medium">Lihat
                         Semua <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
@@ -180,7 +180,7 @@
                     </table>
                 </div>
                 <div class="d-md-flex align-items-center justify-content-end">
-                    <a href="{{ route('be.pesan.list') }}" class="rounded-8 btn fs-7 btn-primary text-end fw-medium">Lihat
+                    <a href="{{ route('be.pesan.list') }}" class="rounded-6 btn fs-7 btn-primary text-end fw-medium">Lihat
                         Semua <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
