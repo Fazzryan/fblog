@@ -11,10 +11,12 @@ class ConKategori extends Controller
     public function index()
     {
         $get_kategori = DB::table('tbl_kategori')
-            ->join('tbl_postingan', 'tbl_kategori.id', '=', 'tbl_postingan.id_kategori')
-            ->select('tbl_kategori.*', DB::raw('COUNT(tbl_postingan.id) as jml'))
+            ->leftJoin('tbl_postingan', 'tbl_kategori.id', '=', 'tbl_postingan.id_kategori')
+            ->select('tbl_kategori.*', DB::raw('COALESCE(COUNT(tbl_postingan.id), 0) as jml'))
             ->groupBy('tbl_kategori.id', 'tbl_kategori.nm_kategori', 'tbl_kategori.slug', 'tbl_kategori.tgl_dibuat', 'tbl_kategori.tgl_diubah')
             ->get();
+        // $get_kategori = DB::table('tbl_kategori')
+        //     ->join();
         return view('backend.pages.kategori.index', compact('get_kategori'));
     }
 

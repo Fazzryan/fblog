@@ -50,7 +50,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Kategori</th>
-                                    <th>Slug</th>
                                     <th>Jumlah Postingan</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -60,7 +59,6 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->nm_kategori }}</td>
-                                        <td>{{ $item->slug }}</td>
                                         <td>{{ $item->jml }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
