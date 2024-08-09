@@ -82,20 +82,26 @@ class ConKategori extends Controller
             // cek apakah id terdaftar
             $cek_id = DB::table('tbl_kategori')->where('id', $id_kategori)->count();
             if ($cek_id > 0) {
-                // cek apakah id dan kategori sudah ada
-                $cek_id_nm = DB::table('tbl_kategori')
+                // cek perubahan
+                $cek_perubahan = DB::table('tbl_kategori')
                     ->where('id', $id_kategori)
                     ->where('nm_kategori', $nm_kategori)->count();
-                if ($cek_id_nm > 0) {
+                if ($cek_perubahan > 0) {
                     return redirect()->back()->with('failed', 'Data Kategori : Tidak ada perubahan!');
                 } else {
-                    // jika kategori masih kosong maka insert data
-                    $data_update = array(
-                        'nm_kategori' => $nm_kategori,
-                        'slug'        => $slug,
-                    );
-                    $query_update = DB::table('tbl_kategori')->where('id', $id_kategori)->update($data_update);
-                    return redirect()->back()->with('success', 'Data Kategori : Berhasil Diubah!');
+                    // cek apakah id dan kategori sudah ada
+                    $cek_nm_kategori = DB::table('tbl_kategori')->where('nm_kategori', $nm_kategori)->count();
+                    if ($cek_nm_kategori > 0) {
+                        return redirect()->back()->with('failed', 'Nama Kategori Sudah Ada!');
+                    } else {
+                        // jika kategori masih kosong maka insert data
+                        $data_update = array(
+                            'nm_kategori' => $nm_kategori,
+                            'slug'        => $slug,
+                        );
+                        $query_update = DB::table('tbl_kategori')->where('id', $id_kategori)->update($data_update);
+                        return redirect()->back()->with('success', 'Data Kategori : Berhasil Diubah!');
+                    }
                 }
             } else {
                 return redirect()->back()->with('failed', 'Data Kategori : Tidak ditemukan!');

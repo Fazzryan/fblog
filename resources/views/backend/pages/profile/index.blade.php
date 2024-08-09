@@ -44,27 +44,31 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <dl class="row">
-                        <dt class="col-sm-4 fw-medium">Foto Profile</dt>
-                        <dd class="col-sm-8">
-                            <img src="" alt="profile" class="img-fluid rounded-circle">
-                        </dd>
+                    @if ($profile == null)
+                        <p>Belum ada profil.</p>
+                    @else
+                        <dl class="row">
+                            <dt class="col-sm-4 fw-medium">Foto Profile</dt>
+                            <dd class="col-sm-8">
+                                <img src="" alt="profile" class="img-fluid rounded-circle">
+                            </dd>
 
-                        <dt class="col-sm-4 fw-medium">Nama Depan</dt>
-                        <dd class="col-sm-8">{{ $profile->nm_depan }}</dd>
+                            <dt class="col-sm-4 fw-medium">Nama Depan</dt>
+                            <dd class="col-sm-8">{{ $profile->nm_depan }}</dd>
 
-                        <dt class="col-sm-4 fw-medium">Nama Belakang</dt>
-                        <dd class="col-sm-8">{{ $profile->nm_belakang }}</dd>
+                            <dt class="col-sm-4 fw-medium">Nama Belakang</dt>
+                            <dd class="col-sm-8">{{ $profile->nm_belakang }}</dd>
 
-                        <dt class="col-sm-4 fw-medium">Youtube</dt>
-                        <dd class="col-sm-8">{{ $profile->youtube }}</dd>
+                            <dt class="col-sm-4 fw-medium">Youtube</dt>
+                            <dd class="col-sm-8">{{ $profile->youtube }}</dd>
 
-                        <dt class="col-sm-4 fw-medium">Instagram</dt>
-                        <dd class="col-sm-8">{{ $profile->instagram }}</dd>
+                            <dt class="col-sm-4 fw-medium">Instagram</dt>
+                            <dd class="col-sm-8">{{ $profile->instagram }}</dd>
 
-                        <dt class="col-sm-4 fw-medium">Github</dt>
-                        <dd class="col-sm-8">{{ $profile->github }}</dd>
-                    </dl>
+                            <dt class="col-sm-4 fw-medium">Github</dt>
+                            <dd class="col-sm-8">{{ $profile->github }}</dd>
+                        </dl>
+                    @endif
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#edit_profile">Ubah Profile</button>
                 </div>
@@ -73,26 +77,30 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="add-username" name="username"
-                                    value="{{ $profile->username }}" readonly>
+                    @if ($profile == null)
+                        <p>Belum ada profil.</p>
+                    @else
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-2">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="add-username" name="username"
+                                        value="{{ $profile->username }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-2">
+                                    <label for="pass" class="form-label">Password</label>
+                                    <input type="text" class="form-control" id="add-pass" name="pass"
+                                        value="{{ $profile->pass }}" readonly>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#ubah_pw">Ubah Password</button>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label for="pass" class="form-label">Password</label>
-                                <input type="text" class="form-control" id="add-pass" name="pass"
-                                    value="{{ $profile->pass }}" readonly>
-                            </div>
-                        </div>
-                        <div class="text-end">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#ubah_pw">Ubah Password</button>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -152,7 +160,9 @@
                             </div>
                             <div class="form-actions">
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-info">Update</button>
+                                    <button type="submit" class="btn btn-info">
+                                        {{ $profile != null ? 'Update' : 'Tambah' }}
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -208,14 +218,18 @@
 @push('js')
     <!--This page plugins -->
     <script>
-        $('#edt-nm_depan').val("{{ $profile->nm_depan }}")
-        $('#edt-nm_belakang').val("{{ $profile->nm_belakang }}")
-        $('#edt-youtube').val("{{ $profile->youtube }}")
-        $('#edt-instagram').val("{{ $profile->instagram }}")
-        $('#edt-github').val("{{ $profile->github }}")
+        @if ($profile != null)
+            $('#edt-nm_depan').val("{{ $profile->nm_depan }}")
+            $('#edt-nm_belakang').val("{{ $profile->nm_belakang }}")
+            $('#edt-youtube').val("{{ $profile->youtube }}")
+            $('#edt-instagram').val("{{ $profile->instagram }}")
+            $('#edt-github').val("{{ $profile->github }}")
 
-        $('#edt-id_user').val("{{ $profile->id_user }}")
-        $('#edt-username').val("{{ $profile->username }}")
-        $('#edt-pass').val("{{ $profile->pass }}")
+            $('#edt-id_user').val("{{ $profile->id_user }}")
+            $('#edt-username').val("{{ $profile->username }}")
+            $('#edt-pass').val("{{ $profile->pass }}")
+        @else
+            $('#edt-id_user').val("{{ session()->get('user_session')['id_user'] }}")
+        @endif
     </script>
 @endpush
