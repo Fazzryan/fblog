@@ -60,8 +60,9 @@
                                         <td class="text-capitalized">{{ $item->email }}</td>
                                         <td class="text-capitalized">{{ $item->pesan }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete_pesan" onclick="delete_pesan({{ $item->id }})">
+                                            <button type="button" class="btn btn-sm btn-danger rounded-6"
+                                                data-bs-toggle="modal" data-bs-target="#delete_pesan"
+                                                onclick="delete_pesan({{ $item->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </td>
@@ -84,8 +85,9 @@
                                 <form action="{{ route('be.pesan.act_delete_pesan') }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" id="hps-id_pesan" name="id_pesan" value="">
-                                    <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-danger my-2"
+                                    <button type="button" class="btn btn-light my-2 rounded-6"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-danger my-2 rounded-6"
                                         data-bs-dismiss="modal">Yakin</button>
                                 </form>
                             </div>
