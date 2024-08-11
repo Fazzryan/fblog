@@ -107,9 +107,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <input type="text" id="add-slug" name="slug" class="form-control"
-                                                    value="{{ old('slug') }}" placeholder="Masukan Slug" required
-                                                    readonly>
+                                                <input type="text" id="add-slug_kategori" name="slug_kategori"
+                                                    class="form-control" value="{{ old('slug_kategori') }}"
+                                                    placeholder="Masukan Slug" required readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -152,9 +152,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <input type="text" id="edt-slug" name="slug" class="form-control"
-                                                    value="{{ old('slug') }}" placeholder="Masukan Slug" required
-                                                    readonly>
+                                                <input type="text" id="edt-slug_kategori" name="slug_kategori"
+                                                    class="form-control" value="{{ old('slug_kategori') }}"
+                                                    placeholder="Masukan Slug" required readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -209,8 +209,8 @@
     </script>
 
     <script>
-        getSlug('#add-nm_kategori', '#add-slug');
-        getSlug('#edt-nm_kategori', '#edt-slug');
+        getSlug('#add-nm_kategori', '#add-slug_kategori');
+        getSlug('#edt-nm_kategori', '#edt-slug_kategori');
         // Membuat Slug
         function getSlug(input, output) {
             $(input).keyup(function() {
@@ -225,7 +225,7 @@
                 if (id == "{{ $val->id }}") {
                     $("#edt-id_kategori ").val("{{ $val->id }}");
                     $("#edt-nm_kategori ").val("{{ $val->nm_kategori }}");
-                    $("#edt-slug ").val("{{ $val->slug }}");
+                    $("#edt-slug_kategori ").val("{{ $val->slug_kategori }}");
                 }
             @endforeach
         }

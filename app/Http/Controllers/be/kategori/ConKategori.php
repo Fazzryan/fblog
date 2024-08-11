@@ -13,7 +13,7 @@ class ConKategori extends Controller
         $get_kategori = DB::table('tbl_kategori')
             ->leftJoin('tbl_postingan', 'tbl_kategori.id', '=', 'tbl_postingan.id_kategori')
             ->select('tbl_kategori.*', DB::raw('COALESCE(COUNT(tbl_postingan.id), 0) as jml'))
-            ->groupBy('tbl_kategori.id', 'tbl_kategori.nm_kategori', 'tbl_kategori.slug', 'tbl_kategori.tgl_dibuat', 'tbl_kategori.tgl_diubah')
+            ->groupBy('tbl_kategori.id', 'tbl_kategori.nm_kategori', 'tbl_kategori.slug_kategori', 'tbl_kategori.tgl_dibuat', 'tbl_kategori.tgl_diubah')
             ->get();
 
         return view('backend.pages.kategori.index', compact('get_kategori'));
@@ -23,8 +23,7 @@ class ConKategori extends Controller
     public function act_add_kategori(Request $request)
     {
         $nm_kategori   = ucwords(strtolower($request->nm_kategori));
-        $slug          = $request->slug;
-
+        $slug_kategori = $request->slug_kategori;
         //Validasi
         $messages = array(
             'required' => ':attribute Harus Di isi!',
@@ -32,16 +31,16 @@ class ConKategori extends Controller
             'max'      => ':attribute Maksimal 50 Karakter!'
         );
         $attribute = array(
-            'nm_kategori' => 'Nama Kategori',
-            'slug'        => 'Slug',
+            'nm_kategori'   => 'Nama Kategori',
+            'slug_kategori' => 'Slug',
         );
         $credentials = array(
-            'nm_kategori' => 'required|min:3|max:50',
-            'slug'        => 'required|min:3|max:50',
+            'nm_kategori'   => 'required|min:3|max:50',
+            'slug_kategori' => 'required|min:3|max:50',
         );
         $data_add = array(
-            'nm_kategori' => $nm_kategori,
-            'slug'        => $slug,
+            'nm_kategori'   => $nm_kategori,
+            'slug_kategori' => $slug_kategori,
         );
 
         $validasi = $this->validate($request, $credentials, $messages, $attribute);
@@ -62,7 +61,7 @@ class ConKategori extends Controller
     {
         $id_kategori   = $request->id_kategori;
         $nm_kategori   = ucwords(strtolower($request->nm_kategori));
-        $slug          = $request->slug;
+        $slug_kategori = $request->slug_kategori;
         //Validasi
         $messages = array(
             'required' => ':attribute Harus Di isi!',
@@ -70,12 +69,12 @@ class ConKategori extends Controller
             'max'      => ':attribute Maksimal 50 Karakter!'
         );
         $attribute = array(
-            'nm_kategori' => 'Nama Kategori',
-            'slug'        => 'Slug',
+            'nm_kategori'   => 'Nama Kategori',
+            'slug_kategori' => 'Slug',
         );
         $credentials = array(
-            'nm_kategori' => 'required|min:3|max:50',
-            'slug'        => 'required|min:3|max:50',
+            'nm_kategori'   => 'required|min:3|max:50',
+            'slug_kategori' => 'required|min:3|max:50',
         );
 
         $validasi = $this->validate($request, $credentials, $messages, $attribute);
@@ -97,8 +96,8 @@ class ConKategori extends Controller
                     } else {
                         // jika kategori masih kosong maka insert data
                         $data_update = array(
-                            'nm_kategori' => $nm_kategori,
-                            'slug'        => $slug,
+                            'nm_kategori'   => $nm_kategori,
+                            'slug_kategori' => $slug_kategori,
                         );
                         $query_update = DB::table('tbl_kategori')->where('id', $id_kategori)->update($data_update);
                         return redirect()->back()->with('success', 'Data Kategori : Berhasil Diubah!');

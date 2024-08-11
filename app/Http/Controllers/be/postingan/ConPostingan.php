@@ -34,6 +34,7 @@ class ConPostingan extends Controller
     public function act_add_postingan(Request $request)
     {
         $title       = $request->title;
+        $id_user     = $request->id_user;
         $id_kategori = $request->id_kategori;
         $slug        = $request->slug;
         $content     = $request->content;
@@ -47,6 +48,7 @@ class ConPostingan extends Controller
         );
         $attribute = array(
             'title'       => 'Nama Kategori',
+            'id_user'     => 'ID User',
             'id_kategori' => 'ID Kategori',
             'slug'        => 'Slug',
             'content'     => 'Konten',
@@ -54,6 +56,7 @@ class ConPostingan extends Controller
         );
         $credentials_non_image = array(
             'title'       => 'required|min:3|max:100',
+            'id_user'     => 'required',
             'id_kategori' => 'required',
             'slug'        => 'required|min:3|max:100',
             'content'     => 'required',
@@ -64,6 +67,7 @@ class ConPostingan extends Controller
 
         $data_add_non_image = array(
             'title'       => $title,
+            'id_user'     => $id_user,
             'id_kategori' => $id_kategori,
             'slug'        => $slug,
             'content'     => $content,
@@ -135,6 +139,7 @@ class ConPostingan extends Controller
     {
         $id_postingan = $request->id_postingan;
         $title        = $request->title;
+        $id_user      = $request->id_user;
         $id_kategori  = $request->id_kategori;
         $slug         = $request->slug;
         $content      = $request->content;
@@ -148,6 +153,7 @@ class ConPostingan extends Controller
         );
         $attribute = array(
             'title'       => 'Nama Kategori',
+            'id_user'     => 'ID User',
             'id_kategori' => 'ID Kategori',
             'slug'        => 'Slug',
             'content'     => 'Konten',
@@ -155,6 +161,7 @@ class ConPostingan extends Controller
         );
         $credentials_non_image = array(
             'title'       => 'required|min:3|max:100',
+            'id_user'     => 'required',
             'id_kategori' => 'required',
             'slug'        => 'required|min:3|max:100',
             'content'     => 'required',
@@ -165,6 +172,7 @@ class ConPostingan extends Controller
 
         $data_add_non_image = array(
             'title'       => $title,
+            'id_user'     => $id_user,
             'id_kategori' => $id_kategori,
             'slug'        => $slug,
             'content'     => $content,
@@ -177,6 +185,7 @@ class ConPostingan extends Controller
                 // cek perubahan data
                 $cek_perubahan = DB::table('tbl_postingan')
                     ->where('id', $id_postingan)
+                    ->where('id_user', $id_user)
                     ->where('title', $title)
                     ->where('id_kategori', $id_kategori)
                     ->where('content', $content)->count();
@@ -187,6 +196,7 @@ class ConPostingan extends Controller
                     $cek_data = DB::table('tbl_postingan')->where('id', $id_postingan)->where('title', $title)->count();
                     if ($cek_data > 0) {
                         $data_add = array(
+                            'id_user'     => $id_user,
                             'id_kategori' => $id_kategori,
                             'slug'        => $slug,
                             'content'     => $content,
@@ -225,6 +235,7 @@ class ConPostingan extends Controller
                         $cek_title = DB::table('tbl_postingan')->where('id', $id_postingan)->where('title', $title)->count();
                         if ($cek_title > 0) {
                             $data_update = array(
+                                'id_user'     => $id_user,
                                 'id_kategori' => $id_kategori,
                                 'slug'        => $slug,
                                 'content'     => $content,

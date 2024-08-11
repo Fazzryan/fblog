@@ -7,6 +7,7 @@ use App\Http\Controllers\be\kategori\ConKategori;
 use App\Http\Controllers\be\pesan\ConPesan;
 use App\Http\Controllers\be\postingan\ConPostingan;
 use App\Http\Controllers\be\profile\ConProfile;
+use App\Http\Controllers\fe\front\ConHome;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,20 @@ use App\Http\Controllers\be\profile\ConProfile;
 |
 */
 
-// Route::get('/', function () {
-//     return view('backend.pages.dashboard.index');
-// });
+Route::group(['as' => 'fe.'],  function () {
+
+    //--------------------------------------------------------------------------
+    //  Routes Home
+    //--------------------------------------------------------------------------
+    Route::get('/', [ConHome::class, 'home'])->name('home');
+
+    //--------------------------------------------------------------------------
+    //  Routes Kategori
+    //--------------------------------------------------------------------------
+    Route::get('/kategori/', [ConHome::class, 'kategori'])->name('kategori');
+});
+
+
 
 Route::get('login', [ConAuth::class, 'index'])->name('login');
 

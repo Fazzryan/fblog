@@ -50,6 +50,8 @@
                     <form action="{{ route('be.postingan.act_add_postingan') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" id="add-id_user" name="id_user"
+                            value="{{ session()->get('user_session')['id_user'] }}">
                         <div class="row">
                             <div class="col-md-12 col-lg-6">
                                 <div class="mb-3">
