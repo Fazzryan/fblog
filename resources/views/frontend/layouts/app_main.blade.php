@@ -11,6 +11,7 @@
     @include('frontend.layouts.app_navbar')
 
     <div class="container">
+        @stack('bread_crumb')
         @yield('konten')
     </div>
 

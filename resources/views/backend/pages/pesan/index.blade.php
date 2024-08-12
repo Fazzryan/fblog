@@ -58,8 +58,14 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td class="text-capitalized">{{ $item->nm_lengkap }}</td>
                                         <td class="text-capitalized">{{ $item->email }}</td>
-                                        <td class="text-capitalized">{{ $item->pesan }}</td>
+                                        <td class="">{{ Str::limit($item->pesan, 70, '...') }}
+                                        </td>
                                         <td>
+                                            <button type="button" class="btn btn-sm btn-success rounded-6"
+                                                data-bs-toggle="modal" data-bs-target="#lihat_pesan"
+                                                onclick="lihat_pesan({{ $item->id }})">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
                                             <button type="button" class="btn btn-sm btn-danger rounded-6"
                                                 data-bs-toggle="modal" data-bs-target="#delete_pesan"
                                                 onclick="delete_pesan({{ $item->id }})">
@@ -74,10 +80,36 @@
                 </div>
             </div>
 
+            {{-- lihat pesan --}}
+            <div id="lihat_pesan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-8">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-medium text-dark">
+                                Dari :
+                                <span id="view-nm_lengkap"></span>,
+                                <span id="view-email" class="fst-italic"></span>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label class="form-label fw-medium">Pesan</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-3">
+                                        <textarea id="view-pesan" class="form-control" cols="30" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> {{-- modal content --}}
+                </div>{{-- modal dialog --}}
+            </div>{{-- modal --}}
+
             {{-- Hapus Data --}}
             <div id="delete_pesan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm modal-dialog-centered">
-                    <div class="modal-content modal-filled bg-dark ">
+                    <div class="modal-content modal-filled bg-dark rounded-6">
                         <div class="modal-body p-4">
                             <div class="text-center">
                                 <h4 class="mt-2">Yakin Hapus Pesan?</h4>
@@ -111,6 +143,16 @@
         });
     </script>
     <script>
+        // Lihat pesan
+        function lihat_pesan(id) {
+            @foreach ($get_pesan as $val)
+                if (id == "{{ $val->id }}") {
+                    $("#view-nm_lengkap ").text("{{ $val->nm_lengkap }}");
+                    $("#view-email ").text("{{ $val->email }}");
+                    $("#view-pesan ").val("{{ $val->pesan }}");
+                }
+            @endforeach
+        }
         // Delete Kategori
         function delete_pesan(id) {
             $("#hps-id_pesan").val(id);

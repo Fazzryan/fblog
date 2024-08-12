@@ -30,7 +30,13 @@ Route::group(['as' => 'fe.'],  function () {
     //--------------------------------------------------------------------------
     //  Routes Kategori
     //--------------------------------------------------------------------------
-    Route::get('/kategori/', [ConHome::class, 'kategori'])->name('kategori');
+    Route::get('/kategori', [ConHome::class, 'kategori'])->name('kategori');
+
+    //--------------------------------------------------------------------------
+    //  Routes About
+    //--------------------------------------------------------------------------
+    Route::get('/tentang', [ConHome::class, 'tentang'])->name('tentang');
+    Route::post('/tentang/act_send_message', [ConHome::class, 'act_send_message'])->name('act_send_message');
 });
 
 

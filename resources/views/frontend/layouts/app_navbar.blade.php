@@ -15,11 +15,12 @@
                         href="{{ route('fe.home') }}">Home</a>
                 </li>
                 <li class="nav-item mx-1">
-                    <a class="nav-link fw-medium {{ request()->is('blog/category') ? 'active' : '' }}"
-                        href="/blog/category">Category</a>
+                    <a class="nav-link fw-medium {{ request()->is('kategori') ? 'active' : '' }}"
+                        href="{{ route('fe.kategori') }}">Kategori</a>
                 </li>
                 <li class="nav-item mx-1">
-                    <a class="nav-link fw-medium {{ request()->is('about') ? 'active' : '' }}" href="/about">About</a>
+                    <a class="nav-link fw-medium {{ request()->is('tentang') ? 'active' : '' }}"
+                        href="{{ route('fe.tentang') }}">Tentang</a>
                 </li>
             </ul>
 
