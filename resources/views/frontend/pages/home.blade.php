@@ -117,7 +117,7 @@
         @empty
             <p class="text-center">Tidak ada postingan</p>
         @endforelse
-        {{-- <div class="d-flex justify-content-center mt-4">{{ $items->links() }}
-        </div> --}}
+        <div class="d-flex justify-content-center mt-4">{{ $get_postingan->links() }}
+        </div>
     </div>
 @endsection
