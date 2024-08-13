@@ -63,10 +63,10 @@
                     {{-- <li class="category-item active">
                                 <a href="">Personal Web Design</a>
                             </li> --}}
-                    @foreach ($get_kategori as $category)
-                        <li class="category-item {{ request()->segment(3) == $category->slug_kategori ? 'active' : '' }}">
-                            <a href="/blog/category/{{ $category->slug_kategori }}"
-                                class="text-capitalize">{{ $category->nm_kategori }}</a>
+                    @foreach ($get_kategori as $item)
+                        <li class="category-item {{ request()->segment(2) == $item->slug_kategori ? 'active' : '' }}">
+                            <a href="{{ route('fe.kategori.nm_kategori', ['nm_kategori' => $item->slug_kategori]) }}"
+                                class="text-capitalize">{{ $item->nm_kategori }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -79,8 +79,8 @@
         @forelse ($get_postingan as $item)
             <div class="col-md-6 col-lg-4 mt-md-2 mt-3">
                 <div class="card rounded-8 shadow-none">
-                    <a href="/blog/category/{{ $item->nm_kategori }}/{{ $item->slug }}" class="overflow-hidden"
-                        style="border-radius:14px; transition:all .5s">
+                    <a href="{{ route('fe.detail_postingan', ['nm_kategori' => $item->slug_kategori, 'detail_postingan' => $item->slug]) }}"
+                        class="overflow-hidden" style="border-radius:14px; transition:all .5s">
                         @if ($item->image)
                             <img src="{{ asset('assets/be/images/icons/' . $item->image) }}"
                                 style="width: 100%; object-fit:cover; aspect-ratio: 16/10; border-radius:14px;"
@@ -91,12 +91,13 @@
                     </a>
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between mt-3 fs-6">
-                            <a href="{{ route('fe.kategori') . '/' . $item->slug_kategori }}" class="card-link fw-medium">
+                            <a href="{{ route('fe.kategori.nm_kategori', ['nm_kategori' => $item->slug_kategori]) }}"
+                                class="card-link fw-medium">
                                 <i class="bi bi-tags"></i>
                                 {{ $item->nm_kategori }}</a>
                         </div>
                         <h3 class="card-title mt-2 ">
-                            <a href="/blog/category/{{ $item->slug_kategori }}/{{ $item->slug }}"
+                            <a href="{{ route('fe.detail_postingan', ['nm_kategori' => $item->slug_kategori, 'detail_postingan' => $item->slug]) }}"
                                 class="card-link text-capitalize">
                                 {!! Str::limit($item->title, 60) !!}
                             </a>
@@ -121,3 +122,35 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            var $scrollContainer = $('#scrollContainer');
+            var scrollAmount = 200; // Jumlah scroll dalam piksel
+
+            function checkScroll() {
+                var maxScrollLeft = $scrollContainer[0].scrollWidth - $scrollContainer[0].clientWidth;
+                $('.scroll-backward').toggle($scrollContainer.scrollLeft() > 0);
+                $('.scroll-forward').toggle($scrollContainer.scrollLeft() < maxScrollLeft);
+            }
+
+            // Initial check
+            checkScroll();
+
+            $('.scroll-backward').click(function() {
+                $scrollContainer.scrollLeft($scrollContainer.scrollLeft() - scrollAmount);
+                setTimeout(checkScroll,
+                    100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+            });
+
+            $('.scroll-forward').click(function() {
+                $scrollContainer.scrollLeft($scrollContainer.scrollLeft() + scrollAmount);
+                setTimeout(checkScroll,
+                    100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+            });
+
+            $scrollContainer.on('scroll', checkScroll); // Perbarui tombol ketika konten digulir secara manual
+        });
+    </script>
+@endpush

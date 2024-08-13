@@ -16,10 +16,10 @@
                         <a href="{{ route('fe.home') }}" class="text-dark fw-medium">Home</a>
                     </li>
                     <li class="mt-2">
-                        <a href="{{ route('fe.kategori') }}" class="text-dark fw-medium">Kategori</a>
+                        <a href="{{ route('fe.kategori.list') }}" class="text-dark fw-medium">Kategori</a>
                     </li>
                     <li class="mt-2">
-                        <a href="{{ route('fe.tentang') }}" class="text-dark fw-medium">Tentang</a>
+                        <a href="{{ route('fe.tentang.list') }}" class="text-dark fw-medium">Tentang</a>
                     </li>
                 </ul>
             </div>

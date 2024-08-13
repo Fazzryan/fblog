@@ -40,7 +40,8 @@
     <div class="row all-category mt-3">
         @forelse ($get_kategori as $kategori)
             <div class="col-6 col-md-4 col-lg-2">
-                <a href="/kategori/{{ $kategori->slug_kategori }}" class="category-link">
+                <a href="{{ route('fe.kategori.nm_kategori', ['nm_kategori' => $kategori->slug_kategori]) }}"
+                    class="category-link">
                     <div class="category-item">
                         {{ $kategori->nm_kategori }}
                     </div>
@@ -53,3 +54,34 @@
         @endforelse
     </div>
 @endsection
+@push('js')
+<script>
+    $(document).ready(function() {
+        var $scrollContainer = $('#scrollContainer');
+        var scrollAmount = 200; // Jumlah scroll dalam piksel
+
+        function checkScroll() {
+            var maxScrollLeft = $scrollContainer[0].scrollWidth - $scrollContainer[0].clientWidth;
+            $('.scroll-backward').toggle($scrollContainer.scrollLeft() > 0);
+            $('.scroll-forward').toggle($scrollContainer.scrollLeft() < maxScrollLeft);
+        }
+
+        // Initial check
+        checkScroll();
+
+        $('.scroll-backward').click(function() {
+            $scrollContainer.scrollLeft($scrollContainer.scrollLeft() - scrollAmount);
+            setTimeout(checkScroll,
+                100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+        });
+
+        $('.scroll-forward').click(function() {
+            $scrollContainer.scrollLeft($scrollContainer.scrollLeft() + scrollAmount);
+            setTimeout(checkScroll,
+                100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+        });
+
+        $scrollContainer.on('scroll', checkScroll); // Perbarui tombol ketika konten digulir secara manual
+    });
+</script>
+@endpush

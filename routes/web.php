@@ -26,17 +26,23 @@ Route::group(['as' => 'fe.'],  function () {
     //  Routes Home
     //--------------------------------------------------------------------------
     Route::get('/', [ConHome::class, 'home'])->name('home');
+    Route::get('/blog/{nm_kategori}/{detail_postingan}', [ConHome::class, 'detail_postingan'])->name('detail_postingan');
 
     //--------------------------------------------------------------------------
     //  Routes Kategori
     //--------------------------------------------------------------------------
-    Route::get('/kategori', [ConHome::class, 'kategori'])->name('kategori');
+    Route::group(['as' => 'kategori.', 'prefix' => '/'],  function () {
+        Route::get('/kategori', [ConHome::class, 'kategori'])->name('list');
+        Route::get('/kategori/{nm_kategori}', [ConHome::class, 'nm_kategori'])->name('nm_kategori');
+    });
 
     //--------------------------------------------------------------------------
     //  Routes About
     //--------------------------------------------------------------------------
-    Route::get('/tentang', [ConHome::class, 'tentang'])->name('tentang');
-    Route::post('/tentang/act_send_message', [ConHome::class, 'act_send_message'])->name('act_send_message');
+    Route::group(['as' => 'tentang.', 'prefix' => '/'],  function () {
+        Route::get('/tentang', [ConHome::class, 'tentang'])->name('list');
+        Route::post('/tentang/act_send_message', [ConHome::class, 'act_send_message'])->name('act_send_message');
+    });
 });
 
 

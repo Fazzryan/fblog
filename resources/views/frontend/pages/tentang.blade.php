@@ -59,7 +59,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <form action="{{ route('fe.act_send_message') }}" method="post">
+            <form action="{{ route('fe.tentang.act_send_message') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
