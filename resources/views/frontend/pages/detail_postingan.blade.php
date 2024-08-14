@@ -41,9 +41,13 @@
             <h2 class="text-dark fw-bold mt-3">{{ $get_postingan->title }}</h2>
             <span class="fs-7 fw-medium">
                 <i class="fas fa-user"></i>
-                {{ $get_postingan->username }}
+                {{ ucwords($get_postingan->username) }}
                 <i class="fas fa-calendar ms-1"></i>
-                {{ $get_postingan->tgl_dibuat }}
+                @php
+                    $date_create = date_create($get_postingan->tgl_dibuat);
+                    $date = date_format($date_create, 'd M Y');
+                @endphp
+                {{ $date }}
                 <i class="fas fa-tags ms-1"></i>
                 {{ $get_postingan->nm_kategori }}
             </span>
@@ -90,26 +94,6 @@
                 @empty
                     <p>Tidak ada postingan terbaru!</p>
                 @endforelse
-                {{-- <a href="#" class="latest-article">
-                    <div class="d-flex align-items-center justify-content-between border-bottom my-3 py-2">
-                        <h5 class="fw-medium">Lorem ipsum, dolor sit amet consectetur w</h5>
-                        <i class="bi bi-arrow-right fs-3"></i>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="d-flex align-items-center justify-content-between border-bottom my-3 py-2">
-                        <h5 class="fw-medium">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit,
-                            digwa?</h5>
-                        <i class="bi bi-arrow-right fs-3"></i>
-                    </div>
-                </a> --}}
-                {{-- <ul class="list-group">
-                    <li class="list-group-item active" aria-current="true">An active item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A second item</li>
-                </ul> --}}
             </div>
             <div class="mt-3">
                 <h3 class="fw-bold text-uppercase border-5 border-bottom pb-2">Kategori</h3>

@@ -27,6 +27,17 @@ class ConHome extends Controller
             ->join('tbl_kategori', 'tbl_postingan.id_kategori', '=', 'tbl_kategori.id')
             ->select('tbl_postingan.*', 'tbl_user.username', 'tbl_kategori.slug_kategori', 'tbl_kategori.nm_kategori')
             ->paginate(12);
+
+        $keywords = request('keywords');
+        if ($keywords != null || $keywords == "") {
+            $get_postingan = DB::table('tbl_postingan')
+                ->join('tbl_user', 'tbl_postingan.id_user', '=', 'tbl_user.id')
+                ->join('tbl_kategori', 'tbl_postingan.id_kategori', '=', 'tbl_kategori.id')
+                ->select('tbl_postingan.*', 'tbl_user.username', 'tbl_kategori.slug_kategori', 'tbl_kategori.nm_kategori')
+                ->where('title', 'LIKE', '%' . $keywords . '%')
+                ->paginate(12);
+        }
+
         $get_kategori = DB::table('tbl_kategori')->get();
         return view('frontend.pages.home', compact('get_postingan', 'get_kategori'));
     }

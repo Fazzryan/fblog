@@ -26,6 +26,7 @@ Route::group(['as' => 'fe.'],  function () {
     //  Routes Home
     //--------------------------------------------------------------------------
     Route::get('/', [ConHome::class, 'home'])->name('home');
+    Route::get('/blog/search', [ConHome::class, 'home'])->name('search');
     Route::get('/blog/{nm_kategori}/{detail_postingan}', [ConHome::class, 'detail_postingan'])->name('detail_postingan');
 
     //--------------------------------------------------------------------------
@@ -45,9 +46,7 @@ Route::group(['as' => 'fe.'],  function () {
     });
 });
 
-
-
-Route::get('login', [ConAuth::class, 'index'])->name('login');
+Route::get('/lgn', [ConAuth::class, 'index'])->name('login');
 
 Route::group(['as' => 'auth.', 'prefix' => '/auth'],  function () {
     Route::post('/act_login', [ConAuth::class, 'act_login'])->name('act_login');

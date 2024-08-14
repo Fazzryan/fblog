@@ -35,17 +35,22 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="text-center">
-                <h1 class="display-4 fw-medium text-dark">Trending On <span class="text-primary">Fazzblog</span>
-                </h1>
-                <h4 class="text-dark fw-medium my-3">"Couriosity didn't kill the cat, it created the
-                    mousetrap"
-                    <br>
-                    -Patrick
-                    Hanlon
-                </h4>
-                <h4 class="text-muted">So read on to nourish your mind. The wheel isn't going to reinvent
-                    itself
-                </h4>
+                @if (request('keywords'))
+                    <h2 class="display-7 text-capitalize">menampilkan hasil
+                        dari "<span class="fw-bold text-dark ">{{ request('keywords') }}</span>"</h3>
+                    @else
+                        <h1 class="display-4 fw-medium text-dark">Trending On <span class="text-primary">Fazzblog</span>
+                        </h1>
+                        <h4 class="text-dark fw-medium my-3">"Couriosity didn't kill the cat, it created the
+                            mousetrap"
+                            <br>
+                            -Patrick
+                            Hanlon
+                        </h4>
+                        <h4 class="text-muted">So read on to nourish your mind. The wheel isn't going to reinvent
+                            itself
+                        </h4>
+                @endif
             </div>
         </div>
     </div>
@@ -75,7 +80,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
         @forelse ($get_postingan as $item)
             <div class="col-md-6 col-lg-4 mt-md-2 mt-3">
                 <div class="card rounded-8 shadow-none">
@@ -106,9 +111,13 @@
                     </div>
                     <div class="bg-white px-0 fs-6">
                         <div class="d-flex justify-content-between">
-                            <span class="fw-medium">Oleh <span class="text-capitalized">{{ $item->username }}</span></span>
+                            <span class="fw-medium">Oleh <span>{{ ucwords($item->username) }}</span></span>
                             <div class="fs-6 fw-medium">
-                                {{ $item->tgl_dibuat }}
+                                @php
+                                    $date_create = date_create($item->tgl_dibuat);
+                                    $date = date_format($date_create, 'd M Y');
+                                @endphp
+                                {{ $date }}
                             </div>
                         </div>
                     </div>
@@ -116,7 +125,16 @@
                 </div>
             </div>
         @empty
-            <p class="text-center">Tidak ada postingan</p>
+            <div class="col-md-6 col-lg-5 text-center">
+                <img src="{{ asset('assets/fe/images/404/notfound.svg') }}" alt="image" class="w-75 mb-5 mt-3">
+                <h3 class="fw-bolder">Tidak Menemukan Hasil!</h3>
+                <p>Tampaknya kami tidak dapat menemukan hasil apa pun berdasarkan penelusuran Anda.
+                </p>
+                <a href="{{ route('fe.home') }}" class="btn btn-dark rounded-6 fw-bold">
+                    <i class="fas fa-reply"></i>
+                    Kembali
+                </a>
+            </div>
         @endforelse
         <div class="d-flex justify-content-center mt-4">{{ $get_postingan->links() }}
         </div>

@@ -24,10 +24,10 @@
                 </li>
             </ul>
 
-            <form method="get" action="" class="d-flex">
+            <form method="get" action="{{ route('fe.search') }}" class="d-flex">
                 {{-- @csrf --}}
-                <input class="form-control me-1 rounded-8" type="search" name="keyword"
-                    value="{{ old('keyword', request('keyword')) }}" placeholder="Cari Blog" aria-label="Search">
+                <input class="form-control me-1 rounded-8" type="search" name="keywords"
+                    value="{{ old('keywords', request('keywords')) }}" placeholder="Cari Blog" aria-label="Search">
                 <button class="btn btn-dark rounded-8" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
