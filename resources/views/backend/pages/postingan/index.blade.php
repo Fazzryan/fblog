@@ -49,11 +49,10 @@
                         <table id="tbl_postingan" class="table border table-striped table-bordered text-nowrap">
                             <thead>
                                 <tr>
-                                    <th width="5">No</th>
-                                    <th width="5">Gambar</th>
+                                    <th>No</th>
+                                    <th>Gambar</th>
                                     <th>Judul</th>
                                     <th>Kategori</th>
-                                    <th>Konten</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -67,14 +66,12 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td width="5">
                                             <img src="{{ asset('assets/be/images/icons') . '/' . $item->image }}"
-                                                width="100"
                                                 style="border-radius:
-                                                    8px;width:100px;height:70px; object-fit:cover;" />
+                                                    6px;width:65px;height:45px; object-fit:cover;" />
                                         </td>
-                                        <td class="text-capitalized">{{ Str::limit($item->title, 40, '...') }}
+                                        <td class="text-capitalized">{{ Str::limit($item->title, 90, '...') }}
                                         </td>
                                         <td class="text-capitalized text-wrap">{{ $item->nm_kategori }}</td>
-                                        <td class="text-capitalized text-wrap">{!! Str::limit($item->content, 40, '...') !!}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success rounded-6"
                                                 onclick="edit_postingan({{ $item->id }})">

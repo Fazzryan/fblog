@@ -18,7 +18,7 @@
                 <h1 class="display-4 fw-medium text-dark">Kategori</h1>
                 <p class="mt-3">Temukan berbagai artikel menarik dan edukatif dalam beragam kategori <br> mulai
                     dari
-                    tips & trik hingga kesehatan, pendidikan, dan berita terkini.</p>
+                    tips & trik, kesehatan dan pendidikan.</p>
             </div>
             <div class="d-flex justify-content-center">
                 <nav aria-label="breadcrumb">
@@ -55,33 +55,33 @@
     </div>
 @endsection
 @push('js')
-<script>
-    $(document).ready(function() {
-        var $scrollContainer = $('#scrollContainer');
-        var scrollAmount = 200; // Jumlah scroll dalam piksel
+    <script>
+        $(document).ready(function() {
+            var $scrollContainer = $('#scrollContainer');
+            var scrollAmount = 200; // Jumlah scroll dalam piksel
 
-        function checkScroll() {
-            var maxScrollLeft = $scrollContainer[0].scrollWidth - $scrollContainer[0].clientWidth;
-            $('.scroll-backward').toggle($scrollContainer.scrollLeft() > 0);
-            $('.scroll-forward').toggle($scrollContainer.scrollLeft() < maxScrollLeft);
-        }
+            function checkScroll() {
+                var maxScrollLeft = $scrollContainer[0].scrollWidth - $scrollContainer[0].clientWidth;
+                $('.scroll-backward').toggle($scrollContainer.scrollLeft() > 0);
+                $('.scroll-forward').toggle($scrollContainer.scrollLeft() < maxScrollLeft);
+            }
 
-        // Initial check
-        checkScroll();
+            // Initial check
+            checkScroll();
 
-        $('.scroll-backward').click(function() {
-            $scrollContainer.scrollLeft($scrollContainer.scrollLeft() - scrollAmount);
-            setTimeout(checkScroll,
-                100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+            $('.scroll-backward').click(function() {
+                $scrollContainer.scrollLeft($scrollContainer.scrollLeft() - scrollAmount);
+                setTimeout(checkScroll,
+                    100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+            });
+
+            $('.scroll-forward').click(function() {
+                $scrollContainer.scrollLeft($scrollContainer.scrollLeft() + scrollAmount);
+                setTimeout(checkScroll,
+                    100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
+            });
+
+            $scrollContainer.on('scroll', checkScroll); // Perbarui tombol ketika konten digulir secara manual
         });
-
-        $('.scroll-forward').click(function() {
-            $scrollContainer.scrollLeft($scrollContainer.scrollLeft() + scrollAmount);
-            setTimeout(checkScroll,
-                100); // Tambahkan sedikit jeda untuk memastikan scroll telah terjadi
-        });
-
-        $scrollContainer.on('scroll', checkScroll); // Perbarui tombol ketika konten digulir secara manual
-    });
-</script>
+    </script>
 @endpush

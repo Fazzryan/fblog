@@ -91,7 +91,7 @@
                                 <textarea name="content" id="editor" cols="30" rows="30">{{ old('content') }}</textarea>
                             </div>
                             <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-primary">Tambah Postingan</button>
+                                <button type="submit" class="btn btn-primary rounded-8">Tambah Postingan</button>
                             </div>
                         </div>
                     </form>

@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-start">
         @forelse ($get_postingan as $item)
             <div class="col-md-6 col-lg-4 mt-md-2 mt-3">
                 <div class="card rounded-8 shadow-none">
@@ -100,16 +100,24 @@
                                 class="card-link fw-medium">
                                 <i class="bi bi-tags"></i>
                                 {{ $item->nm_kategori }}</a>
+
+                            <div class="fs-6 fw-medium">
+                                @php
+                                    $date_create = date_create($item->tgl_dibuat);
+                                    $date = date_format($date_create, 'd M Y');
+                                @endphp
+                                {{ $date }}
+                            </div>
                         </div>
                         <h3 class="card-title mt-2 ">
                             <a href="{{ route('fe.detail_postingan', ['nm_kategori' => $item->slug_kategori, 'detail_postingan' => $item->slug]) }}"
                                 class="card-link text-capitalize">
-                                {!! Str::limit($item->title, 60) !!}
+                                {!! Str::limit($item->title, 70) !!}
                             </a>
                         </h3>
                         <p class="card-text m-0">{!! Str::limit($item->content, 90) !!}</p>
                     </div>
-                    <div class="bg-white px-0 fs-6">
+                    {{-- <div class="bg-white px-0 fs-6">
                         <div class="d-flex justify-content-between">
                             <span class="fw-medium">Oleh <span>{{ ucwords($item->username) }}</span></span>
                             <div class="fs-6 fw-medium">
@@ -120,7 +128,7 @@
                                 {{ $date }}
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

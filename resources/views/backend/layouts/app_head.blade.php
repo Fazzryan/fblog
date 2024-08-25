@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 @stack('meta-seo')
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/be/images/icons/favicon.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/be/images/icons/logo.png') }}">
 <!-- Custom CSS -->
 <link href="{{ asset('assets/be/css/style.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/be/css/mystyle.css') }}" rel="stylesheet">

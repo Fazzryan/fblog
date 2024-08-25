@@ -81,25 +81,30 @@
                                 <a href="{{ route('fe.kategori.nm_kategori', ['nm_kategori' => $item->slug_kategori]) }}"
                                     class="card-link fw-medium"> <i class="bi bi-tags"></i>
                                     {{ $item->nm_kategori }}</a>
+                                <div class="fs-6 fw-medium">
+                                    @php
+                                        $date_create = date_create($item->tgl_dibuat);
+                                        $date = date_format($date_create, 'd M Y');
+                                    @endphp
+                                    {{ $date }}
+                                </div>
                             </div>
                             <h3 class="card-title mt-2 ">
                                 <a href="{{ route('fe.detail_postingan', ['nm_kategori' => $item->slug_kategori, 'detail_postingan' => $item->slug]) }}"
                                     class="card-link text-capitalize">
-                                    {!! Str::limit($item->title, 60) !!}
+                                    {!! Str::limit($item->title, 70) !!}
                                 </a>
                             </h3>
                             <p class="card-text m-0 fs-6">{!! Str::limit($item->content, 90) !!}</p>
-                            {{-- </div> --}}
-
                         </div>
-                        <div class="bg-white px-0 fs-6">
+                        {{-- <div class="bg-white px-0 fs-6">
                             <div class="d-flex justify-content-between">
                                 <span class="fw-medium">Oleh {{ $item->username }}</span>
                                 <div class="fs-6 fw-medium">
                                     {{ $item->tgl_dibuat }}
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @empty

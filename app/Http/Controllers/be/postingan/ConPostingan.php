@@ -13,7 +13,7 @@ class ConPostingan extends Controller
         $get_postingan = DB::table('tbl_postingan')
             ->join('tbl_kategori', 'tbl_postingan.id_kategori', '=', 'tbl_kategori.id')
             ->select('tbl_postingan.*', 'tbl_kategori.nm_kategori')
-            ->orderBy('tbl_postingan.tgl_dibuat', 'asc')
+            ->orderBy('tbl_postingan.tgl_dibuat', 'desc')
             ->get();
         return view('backend.pages.postingan.index', compact('get_postingan'));
     }

@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="col-md-12 col-lg-4">
-            <div class="position-sticwky mb-4" style="top:100px;">
+            <div class="position-sticky1 mb-4" style="top:100px;">
                 {{-- <h3 class="fw-bold text-uppercase">Artikel Terbaru</h3> --}}
                 <h3 class="fw-bold text-uppercase border-5 border-bottom pb-2">Artikel Terbaru</h3>
                 @forelse ($get_postingan_terbaru as $item)
@@ -83,10 +83,10 @@
                             <div class="me-3">
                                 <span class="fs-7 text-primary fw-medium">{{ $item->nm_kategori }}</span>
                                 <h5 class="fw-medium mt-1">{!! Str::limit($item->title, 60) !!}</h5>
-                                <span class="fs-7">{{ $item->tgl_dibuat }}</span>
+                                {{-- <span class="fs-7">{{ $item->tgl_dibuat }}</span> --}}
                             </div>
                             <img src="{{ asset('assets/be/images/icons') . '/' . $item->image }}" class="rounded-8"
-                                style="width: 120px; height:80px; aspect-ratio:1/1; object-fit: cover;" alt="image"
+                                style="max-width: 120px; height:80px; aspect-ratio:1/1; object-fit: cover;" alt="image"
                                 loading="lazy">
                         </div>
                     </a>
@@ -95,6 +95,7 @@
                     <p>Tidak ada postingan terbaru!</p>
                 @endforelse
             </div>
+
             <div class="mt-3">
                 <h3 class="fw-bold text-uppercase border-5 border-bottom pb-2">Kategori</h3>
                 @forelse ($get_kategori as $item)

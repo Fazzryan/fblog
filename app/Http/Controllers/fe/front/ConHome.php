@@ -59,6 +59,7 @@ class ConHome extends Controller
             ->join('tbl_kategori', 'tbl_postingan.id_kategori', '=', 'tbl_kategori.id')
             ->select('tbl_postingan.*', 'tbl_user.username', 'tbl_kategori.slug_kategori', 'tbl_kategori.nm_kategori')
             ->orderBy('tbl_postingan.tgl_dibuat', 'desc')
+            ->limit(5)
             ->get();
         $get_kategori = DB::table('tbl_kategori')->get();
 

@@ -53,8 +53,10 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-6">
                                 <div class="mb-3">
-                                    <input type="hidden" id="edt_id_postingan" name="id_postingan"
+                                    <input type="hidden" id="edt-id_postingan" name="id_postingan"
                                         value="{{ $get_postingan->id }}">
+                                    <input type="hidden" id="edt-id_user" name="id_user"
+                                        value="{{ $get_postingan->id_user }}">
                                     <label for="edt-title" class="form-label">Judul</label>
                                     <input type="text" id="edt-title" name="title" class="form-control"
                                         placeholder="Masukan Judul Postingan" value="{{ $get_postingan->title }}">
@@ -97,7 +99,7 @@
                                 <textarea name="content" id="editor" cols="30" rows="30">{!! $get_postingan->content !!}</textarea>
                             </div>
                             <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-primary">Update Postingan</button>
+                                <button type="submit" class="btn btn-primary rounded-8">Update Postingan</button>
                             </div>
                         </div>
                     </form>

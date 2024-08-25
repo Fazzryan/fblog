@@ -13,9 +13,8 @@ class ConDashboard extends Controller
         $get_postingan = DB::table('tbl_postingan')
             ->join('tbl_kategori', 'tbl_postingan.id_kategori', '=', 'tbl_kategori.id')
             ->select('tbl_postingan.*', 'tbl_kategori.nm_kategori')
-            ->limit(5)->orderBy('id', 'asc')->get();
-        $get_kategori = DB::table('tbl_kategori')->limit(5)->orderBy('id', 'asc')->get();
-        $get_pesan = DB::table('tbl_pesan')->limit(5)->orderBy('id', 'asc')->get();
+            ->limit(5)->orderBy('tgl_dibuat', 'desc')->get();
+        $get_pesan = DB::table('tbl_pesan')->limit(5)->orderBy('tgl_dibuat', 'desc')->get();
 
         $jml_postingan = DB::table('tbl_postingan')->count();
         $jml_kategori  = DB::table('tbl_kategori')->count();
@@ -25,7 +24,6 @@ class ConDashboard extends Controller
             'backend.pages.dashboard.index',
             compact(
                 'get_postingan',
-                'get_kategori',
                 'get_pesan',
                 'jml_postingan',
                 'jml_kategori',

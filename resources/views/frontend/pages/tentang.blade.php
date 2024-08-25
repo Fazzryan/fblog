@@ -10,10 +10,10 @@
 @endpush
 @section('konten')
     <div class="row justify-content-center about">
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <div class="d-md-flex text-center text-md-start">
-                <img src="{{ asset('assets/be/images/pic') . '/' . $get_profile->foto }}" alt="profile" class="img-profile"
-                    loading="lazy">
+                {{-- <img src="{{ asset('assets/be/images/pic') . '/' . $get_profile->foto }}" alt="profile" class="img-profile"
+                    loading="lazy"> --}}
                 <div class="ms-md-5 ms-0 mt-3 mt-md-0">
                     <h1 class="fw-bold">{{ $get_profile->nm_depan }} {{ $get_profile->nm_belakang }} </h1>
                     <p>Seorang yang antusias dalam dunia pemrograman. Senang mempelajari
@@ -45,6 +45,7 @@
             </h2>
         </div>
         <div class="col-md-8 col-lg-6 mt-3">
+
             @if (session('status'))
                 <div class="alert alert-danger alert-dismissible bg-danger fade show" role="alert">
                     {{ session('status') }}
@@ -59,7 +60,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <form action="{{ route('fe.tentang.act_send_message') }}" method="post">
+            <form action="{{ route('fe.tentang.act_send_message') }}" method="post" id="form-message">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -86,10 +87,15 @@
                         @error('pesan')
                             <span class="error text-danger fs-6"> * {{ $message }}</span>
                         @enderror
-                        <div class="text-end mt-3">
-                            <button type="submit" class="btn btn-dark fw-medium rounded-8">
+                        <div class="d-flex justify-content-end text-end mt-3">
+                            <button type="button" id="btn-send_message" class="btn btn-dark fw-medium rounded-8">
                                 <i class="fas fa-paper-plane me-1"></i>
                                 Kirim
+                            </button>
+                            <button class="btn btn-dark text-end fw-medium rounded-8 d-none" id="btn-loading" type="button"
+                                disabled="">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
                             </button>
                         </div>
                     </div>
@@ -98,3 +104,18 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $("#btn-send_message").click(function() {
+
+            $("#btn-send_message").addClass("d-none");
+
+            $("#btn-loading").removeClass("d-none");
+            $("#btn-loading").addClass("d-block");
+
+            setTimeout(() => {
+                $('#form-message').submit();
+            }, 1000);
+        });
+    </script>
+@endpush
